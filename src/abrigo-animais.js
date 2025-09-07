@@ -31,8 +31,10 @@ class AbrigoAnimais
     function validarBrinquedos(lista)
     {
       const set = new Set(lista);
-      return set.zise === lista.length && lista.every(b => brinquedosValidos.has(b));
+      const valido = set.size === lista.length && lista.every(b => brinquedosValidos.has(b));
+      return valido;
     }
+
     if (!validarBrinquedos(brinquedos1) || !validarBrinquedos(brinquedos2))
     {
       return {erro: 'Brinquedo inválido', lista: null};
@@ -66,7 +68,7 @@ class AbrigoAnimais
       const cond2 = contemSequencia(brinquedos2, info.brinquedos);
       let destino = 'abrigo';
 
-      if (animal == 'Loco')
+      if (animal === 'Loco')
       {
         //só vai se já tiver outro animal junto
         if (cond1 && adotados.p1.length > 0 && adotados.p1.length < 3)
@@ -99,14 +101,14 @@ class AbrigoAnimais
       }
       if (destino === 'pessoa 2')
       {
-        adotados.p2 .push(animal);
+        adotados.p2.push(animal);
       }
 
       resultado.push(`${animal} - ${destino}`);
     }
 
     //vai ordernar a lista alfabeticamente
-    return {lista: resultado.sort()};
+    return {lista: resultado.sort(), erro: null};
   }
 }
 export { AbrigoAnimais as AbrigoAnimais };
