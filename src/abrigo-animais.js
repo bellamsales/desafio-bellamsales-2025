@@ -19,7 +19,14 @@ class AbrigoAnimais
     const brinquedos2 = brinquedosPessoa2.split(',').map(b => b.trim());
     const ordem = ordemAnimais.split(',').map(b => b.trim());
 
-    //Validar os brinquedos inváslidos ou duplicados
+    //Validar os animais inválidos ou duplicados
+    const setAnimais = new Set(ordem);
+    if (setAnimais.size !== ordem.length || ordem.some(a => !animais[a]))
+    {
+      return {erro: 'Animal inválido', lista: null};
+    }
+
+    //Validar os brinquedos inválidos ou duplicados
     const brinquedosValidos = new Set(Object.values(animais).flatMap(a => a.brinquedos));
     function validarBrinquedos(lista)
     {
@@ -28,14 +35,14 @@ class AbrigoAnimais
     }
     if (!validarBrinquedos(brinquedos1) || !validarBrinquedos(brinquedos2))
     {
-      return {erro: 'Brinquedo inválido'};
+      return {erro: 'Brinquedo inválido', lista: null};
     }
 
     //Função para checar a lista
     function contemSequencia(brinquedosPessoa, brinquedosAnimal)
     {
       let i = 0;
-      for (b of brinquedosPessoa)
+      for (let b of brinquedosPessoa)
       {
         if (b === brinquedosAnimal[i])
         {
@@ -97,6 +104,7 @@ class AbrigoAnimais
 
       resultado.push(`${animal} - ${destino}`);
     }
+
     //vai ordernar a lista alfabeticamente
     return {lista: resultado.sort()};
   }
