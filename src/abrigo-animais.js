@@ -1,6 +1,5 @@
 class AbrigoAnimais
 {
-
   encontraPessoas(brinquedosPessoa1, brinquedosPessoa2, ordemAnimais)
   {
     //Base fixa dos animais e brinquedos
@@ -62,7 +61,7 @@ class AbrigoAnimais
 
       if (animal == 'Loco')
       {
-        //só vau se já tiver outro animal junto
+        //só vai se já tiver outro animal junto
         if (cond1 && adotados.p1.length > 0 && adotados.p1.length < 3)
         {
           destino = 'pessoa 1';
@@ -71,25 +70,35 @@ class AbrigoAnimais
         {
           destino = 'pessoa 2';
         }
-        else
-        {
-          if (cond1 && cond2)
-          {
-            destino = 'abrigo';
-          }
-          else if (cond1 && adotados.p1.length < 3)
-          {
-            destino = 'pessoa 1';
-          }
-          else if (cond2 && adotados.p2.length < 3)
-          {
-            destino = 'pessoa 2';
-          }
-        }
-        resultado.push(`${animal} - ${destino}`);
       }
+      else
+      {
+        if (cond1 && cond2)
+        {
+          destino = 'abrigo';
+        }
+        else if (cond1 && adotados.p1.length < 3)
+        {
+          destino = 'pessoa 1';
+        }
+        else if (cond2 && adotados.p2.length < 3)
+        {
+          destino = 'pessoa 2';
+        }
+      }
+      if (destino === 'pessoa 1')
+      {
+        adotados.p1.push(animal);
+      }
+      if (destino === 'pessoa 2')
+      {
+        adotados.p2 .push(animal);
+      }
+
+      resultado.push(`${animal} - ${destino}`);
     }
+    //vai ordernar a lista alfabeticamente
+    return {lista: resultado.sort()};
   }
 }
-
 export { AbrigoAnimais as AbrigoAnimais };
